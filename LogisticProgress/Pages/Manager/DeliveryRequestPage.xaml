@@ -1,0 +1,50 @@
+﻿<Page x:Class="LogisticProgress.Pages.Manager.DeliveryRequestPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LogisticProgress.Pages.Manager"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1200"
+      Title="DeliveryRequestPage" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" x:Name="columnNeedRequest"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Недостаточно на складе" HorizontalAlignment="Center" FontSize="20" Margin="20 5" Name="tblNeedRequestTitle"/>
+            <TextBlock x:Name="tblNeedRequest"/>
+            <TextBlock Text="В процессе доставки" HorizontalAlignment="Center" FontSize="20"  Margin="20 5" Name="tblInProcessTitle"/>
+            <TextBlock x:Name="tblInProcess"/>
+        </StackPanel>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Заявки на поставку" HorizontalAlignment="Center" FontSize="24"/>
+            <DataGrid Margin="10" Grid.Row="1" x:Name="dgDevReq" AutoGenerateColumns="False" IsReadOnly="True" Background="Transparent" FontFamily="Palatino Linotype"
+                  FontSize="14" HorizontalAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn MinWidth="100" Width="100" Header="Номер заявки" Binding="{Binding ReqNum}" CellStyle="{StaticResource DataGridCell}"/>
+                    <DataGridTextColumn MinWidth="130" Header="Дата составления" Binding="{Binding DateOfPreparation, StringFormat={}{0:dd.MM.yyyy}}" CellStyle="{StaticResource DataGridCell}"/>
+                    <DataGridTextColumn MinWidth="150" Width="150" Header="Дата планируемой поставки" Binding="{Binding DateOfDelivery, StringFormat={}{0:dd.MM.yyyy}}" CellStyle="{StaticResource DataGridCell}"/>
+                    <DataGridTextColumn MinWidth="100" Header="Составитель" Binding="{Binding User.FullName}"/>
+                    <DataGridTextColumn MinWidth="85" Header="Поставщик" Binding="{Binding Supplier.Name}" CellStyle="{StaticResource DataGridCell}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btnLook" Content="Посмотреть" Click="btnLook_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Margin="5 5 640 5" Grid.Row="2" HorizontalAlignment="Center" Content="Создать" Name="btnAdd" Click="btnAdd_Click"/>
+            <Button Margin="640 5 5 5" Grid.Row="2" HorizontalAlignment="Center" Content="Удалить" Name="btnDelete" Click="btnDelete_Click"/>
+        </Grid>
+    </Grid>
+</Page>

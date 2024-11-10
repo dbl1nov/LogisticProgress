@@ -1,0 +1,100 @@
+﻿<Page x:Class="LogisticProgress.Pages.Manager.AddLookDeliveryRequestPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LogisticProgress.Pages.Manager"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1200"
+      Title="AddLookDeliveryRequestPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" x:Name="columnNeedRequest"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Недостаточно на складе" HorizontalAlignment="Center" FontSize="20"  Margin="20 5" Name="tblNeedRequestTitle"/>
+            <TextBlock x:Name="tblNeedRequest"/>
+            <TextBlock Text="В процессе доставки" HorizontalAlignment="Center" FontSize="20"  Margin="20 5" Name="tblInProcessTitle"/>
+            <TextBlock x:Name="tblInProcess"/>
+        </StackPanel>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="90" x:Name="rowAddProduct"/>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="50" x:Name="rowButtonSave"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock Text="Заявка на поставку" HorizontalAlignment="Center" FontSize="24"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="Номер договора"/>
+                    <TextBox Text="{Binding ReqNum}" Width="100" Name="tbInvNum" FontFamily="Palatino Linotype"/>
+                    <TextBlock Text="Дата составления"/>
+                    <DatePicker Name="dpDateOfPreporation" SelectedDate="{Binding DateOfPreparation}" Height="30" Padding="2,0,2,2" Margin="5" FontFamily="Palatino Linotype" 
+                                FontSize="16" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="Дата планируемой поставки"/>
+                    <DatePicker Name="dpDateOfDelivery" SelectedDate="{Binding DateOfDelivery}" Height="30" Padding="2,0,2,2" Margin="5" FontFamily="Palatino Linotype" 
+                                FontSize="16" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="Составитель"/>
+                    <ComboBox SelectedItem="{Binding User}" Width="320" Margin="5" Name="cbComplier" FontFamily="Georgia" FontSize="16" 
+                          DisplayMemberPath="FullName"/>
+                    <TextBlock Text="Поставщик"/>
+                    <ComboBox SelectedItem="{Binding Supplier}" Width="180" Margin="5" Name="cbSupplier" FontFamily="Georgia" FontSize="16" 
+                          DisplayMemberPath="Name"/>
+                    <Button Content="Добавить поставщика" Name="btnAddSupplier" Click="btnAddSupplier_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+
+            <Button Grid.Row="1" Content="Внести товары" Name="btnAddProductsToDevReq" Click="btnAddProductsToDevReq_Click"/>
+            <GroupBox Grid.Row="1" Visibility="Hidden" Name="grbAddProducts">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="Товар"/>
+                        <ComboBox DisplayMemberPath="Name" Width="310" Name="cbProducts" FontFamily="Georgia" FontSize="16" Margin="5"/>
+                        <TextBlock Text="Количество"/>
+                        <TextBox Width="70" Name="tbQty" FontFamily="Palatino Linotype"/>
+                        <TextBlock Text="Цена"/>
+                        <TextBox Width="100" Name="tbPrice" FontFamily="Palatino Linotype"/>
+                        <Button Content="Внести" Name="btnAddToReq" Click="btnAddToReq_Click"/>
+                    </StackPanel>
+                    <Button Content="Добавить товар" Name="AddProduct" Click="AddProduct_Click"/>
+
+                </StackPanel>
+            </GroupBox>
+
+            <DataGrid Grid.Row="2" x:Name="dgDevReqProducts" AutoGenerateColumns="False" IsReadOnly="True" Background="Transparent" FontFamily="Palatino Linotype"
+                  FontSize="14" HorizontalAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Product.Name}"/>
+                    <DataGridTextColumn Header="Количество" Binding="{Binding Qty}" CellStyle="{StaticResource DataGridCell}"/>
+                    <DataGridTextColumn Header="Цена за шт" Binding="{Binding Price, StringFormat={}{0:0.00}}" CellStyle="{StaticResource DataGridCell}"/>
+                    <DataGridTextColumn Header="Сумма" Binding="{Binding Summ, StringFormat={}{0:0.00}}" CellStyle="{StaticResource DataGridCell}"/>
+                    <DataGridTemplateColumn x:Name="dgColumnDelete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btnDelete" Content="Удалить" Click="btnDelete_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center">
+                <TextBlock Text="Итого:" HorizontalAlignment="Center"/>
+                <TextBlock Name="tblSumm" Text="{Binding Summ, StringFormat={}{0:0.00}}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
+                <Button Content="Сохранить" Name="btnSave" Click="btnSave_Click"/>
+                <Button Content="Сохранить в PDF" Name="btnSavePDF" Click="btnSavePDF_Click"/>
+                <Button Content="Отменить" Name="btnCancel" Click="btnCancel_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

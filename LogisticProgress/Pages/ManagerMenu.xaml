@@ -1,0 +1,19 @@
+﻿<Page x:Class="LogisticProgress.Pages.ManagerMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LogisticProgress.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="405" d:DesignWidth="800"
+      Title="ManagerMenu">
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="Панель менеджера" FontSize="22"/>
+        <Button Content="Приходная накладная" Name="btnPurInv" Click="btnPurInv_Click"/>
+        <Button Content="Товары" Name="btnProducts" Click="btnProducts_Click"/>
+        <Button Content="АВС-анализ" Name="btnABCAnslysis" Click="btnABCAnslysis_Click"/>
+        <Button Content="Продажи" Name="btnSellings" Click="btnSellings_Click"/>
+        <Button Content="Заявка на поставку" Name="btnDevReq" Click="btnDevReq_Click"/>
+    </StackPanel>
+</Page>

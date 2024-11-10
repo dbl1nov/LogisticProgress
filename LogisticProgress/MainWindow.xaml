@@ -1,0 +1,21 @@
+﻿<Window x:Class="LogisticProgress.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LogisticProgress"
+        mc:Ignorable="d"
+        Title="Продажи и склад" Height="450" Width="860" MinHeight="450" MinWidth="860" Background="#fcfcee" WindowStartupLocation="CenterScreen" 
+        WindowState="Maximized" Icon="Resources/icon.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="#f0f095">
+            <TextBlock Text="Управление продажами и складом" FontSize="18"/>
+            <Button Content="Назад" HorizontalAlignment="Right" Name="btnBack" Click="btnBack_Click" Visibility="Hidden"/>
+        </Grid>
+        <Frame Grid.Row="1" Name="MainFrame" NavigationUIVisibility='Hidden' ContentRendered="MainFrame_ContentRendered"/>
+    </Grid>
+</Window>
